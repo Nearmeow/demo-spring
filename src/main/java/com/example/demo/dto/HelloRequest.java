@@ -4,6 +4,9 @@ public class HelloRequest {
 
     private String message;
 
+    public HelloRequest() {
+    }
+
     public HelloRequest(String message) {
         this.message = message;
     }
