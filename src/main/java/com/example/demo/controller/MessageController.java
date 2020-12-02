@@ -1,8 +1,9 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.dto.MessageDtoRequest;
-import com.example.demo.dto.MessageDtoResponse;
+import com.example.demo.dto.*;
+import com.example.demo.entity.User;
+import com.example.demo.exception.HelloException;
 import com.example.demo.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -28,8 +29,18 @@ public class MessageController {
     return messageService.getAllMessages();
   }
 
+  @GetMapping(value = "/users/get", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<GetUsersDtoResponse> getAllUsers() {
+    return messageService.getAllUsers();
+  }
+
   @PostMapping(value = "/messages/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public MessageDtoResponse addMessage(@RequestBody MessageDtoRequest request) {
+  public MessageDtoResponse addMessage(@RequestBody MessageDtoRequest request) throws HelloException {
     return messageService.addMessage(request);
+  }
+
+  @PostMapping(value = "/users/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  public AddUserDtoResponse addUser(@RequestBody AddUserDtoRequest request) {
+    return messageService.addUser(request);
   }
 }
